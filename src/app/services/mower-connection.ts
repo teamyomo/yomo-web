@@ -5,6 +5,11 @@ export class MowerConnection {
 
     public async connect() {
         // dummy stuff going on
+        this.receive('data', [
+            {
+                regions: [{ name: 'NE 3.4 Lot' }, { name: 'SE 0.5' }, { name: 'N Hangar' }, { name: 'Pool' }]
+            }
+        ]);
         this.receive('status', [
             { label: 'Activity', value: 'MOWING' },
             { label: 'Nav Area', value: 'NE-3.4 lot' },

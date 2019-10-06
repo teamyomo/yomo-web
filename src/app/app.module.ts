@@ -14,9 +14,11 @@ import { SplitterComponent } from './features/components/splitter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
     declarations: [
@@ -36,9 +38,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         FormsModule,
         MatButtonModule,
         MatInputModule,
+        MatSelectModule,
         MatSliderModule,
         MatTabsModule,
-        MatToolbarModule
+        MatToolbarModule,
+        NgxChartsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
