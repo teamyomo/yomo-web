@@ -17,16 +17,8 @@ export class Command implements IPage {
         </div>
         <div class="middle">
             <div class="dash">
-                <div class="left">
-                    <div class="battery-container">
-                        <div class="battery">
-                            <div class="battery-level" [style.background]="getBatteryLife()">{{ getBatteryLevel() }} <i class="fa fa-power"></i></div>
-                        </div>
-                        <i class="fa fa-2x fa-car-battery"></i>
-                    </div>
-                </div>
                 <div class="hud">
-                    <div class="height"></div>
+                    <div class="left"></div>
                     <div class="speed">
                         <ngx-charts-gauge
                             [min]="0"
@@ -42,7 +34,7 @@ export class Command implements IPage {
                         <div class="battery-container">
                             <div class="battery">
                                 <div class="battery-level" [style.background]="getBatteryLife()">
-                                    {{ getBatteryLevel() }} <i class="fa fa-power"></i>
+                                    <span>{{ getBatteryLevel() }}</span> <i class="fa fa-power"></i>
                                 </div>
                             </div>
                             <i class="fa fa-2x fa-car-battery"></i>
@@ -50,12 +42,31 @@ export class Command implements IPage {
                     </div>
                 </div>
                 <div class="controls">
-                    <button class="stop mat-elevation-z8" mat-raised-button color="warn" (click)="model.mower.stop()">All Stop</button>
+                    <div>
+                        <div class="deck-height">
+                            <i class="fa fa-2x fa-arrow-circle-up"></i>
+                            <mat-slider
+                                [min]="1"
+                                [thumbLabel]="true"
+                                [max]="20"
+                                [step]="1"
+                                [displayWith]="toCm"
+                                vertical="vertical"
+                                [(value)]="model.mower.deckHeight"
+                            ></mat-slider>
+                            <div class="mat-caption">Deck height</div>
+                        </div>
+                    </div>
+                    <div class="stop-container">
+                        <button class="stop mat-elevation-z8" mat-raised-button color="warn" (click)="model.mower.stop()">All Stop</button>
+                    </div>
                     <div class="lesser-controls">
-                        <mat-select [(value)]="model.mower.currentRegion">
-                            <mat-option [value]="undefined">Manual Steer</mat-option>
-                            <mat-option *ngFor="let region of model.mower.regions" [value]="region">Autonomous {{ region.name }}</mat-option>
-                        </mat-select>
+                        <mat-form-field class="mode-selector">
+                            <mat-label>Select Mode</mat-label>
+                            <mat-select [(value)]="selectedMode" color="accent">
+                                <mat-option *ngFor="let mode of modes" [value]="mode">{{ mode.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                         <button
                             class="stop mat-elevation-z8"
                             class="power"
@@ -112,7 +123,7 @@ export class Command implements IPage {
             }
             .controls {
                 display: grid;
-                grid-template-columns: 60% 40%;
+                grid-template-columns: 10% 60% 30%;
             }
             .hud {
                 display: grid;
@@ -122,13 +133,14 @@ export class Command implements IPage {
             .stop {
                 font-size: 4vw;
                 border-radius: 2vw;
+                height: 100%;
+                width: 100%;
             }
             .power {
                 font-size: 2vw;
                 width: 100%;
             }
             .lesser-controls {
-                padding-left: 1vw;
             }
             .battery-container {
                 display: flex;
@@ -152,16 +164,51 @@ export class Command implements IPage {
                 align-items: center;
                 width: 100%;
             }
-            .speed {
+            .battery-level span {
+                font-weight: bold;
+                mix-blend-mode: difference;
+            }
+            .stop-container {
+                padding: 0 1rem;
+            }
+            .deck-height {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem;
+                box-sizing: border-box;
+                border-radius: 1rem;
+                background: #fff1;
+                text-align: center;
+            }
+            .speed ::ng-deep svg > g > text {
+                fill: #fff;
+            }
+            .mode-selector {
+                width: 100%;
+                border-radius: 1rem;
+                padding: 1rem;
+                box-sizing: border-box;
+                margin-bottom: 1rem;
+                background: #fff1;
             }
         `
     ]
 })
-export class CommandComponent {
+export class CommandComponent implements OnInit {
     @Input()
     public model!: Command;
 
+    public selectedMode: { name: string };
+    public modes: { name: string }[] = [];
+
     constructor() {}
+
+    ngOnInit() {
+        this.modes = [{ name: 'Manual Steer' }, ...this.model.mower.regions.map(r => ({ name: 'Autonomous ' + r.name }))];
+        this.selectedMode = this.modes[0];
+    }
 
     public getPowerButtonColor() {
         return this.model.mower.mowerState === 'on' ? 'accent' : 'none';
@@ -178,6 +225,10 @@ export class CommandComponent {
 
     public getBatteryLife() {
         const pct = (1 - this.model.mower.battery) * 100;
-        return `linear-gradient(transparent ${pct}%, green ${pct}%)`;
+        return `linear-gradient(transparent ${pct}%, #fff ${pct}%)`;
+    }
+
+    public toCm(value: number) {
+        return value + 'cm';
     }
 }

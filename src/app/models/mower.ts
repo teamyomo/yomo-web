@@ -30,6 +30,9 @@ export class Mower {
     public deckWidth: number = 0.4;
 
     @observable
+    public deckHeight: number = 8;
+
+    @observable
     public overlap: number = 50;
 
     @observable
