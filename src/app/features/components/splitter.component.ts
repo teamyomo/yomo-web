@@ -69,7 +69,7 @@ export class SplitterComponent {
                 const delta = evt.x - startX,
                     newPos = startW + delta,
                     newWidth = Math.min(1, Math.max(0, newPos / windowWidth));
-                console.log(startW, windowWidth, startX, evt.x, delta, newPos, newWidth);
+
                 this.widthChange.emit(newWidth);
             },
             onMseUp = () => {

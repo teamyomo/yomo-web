@@ -50,7 +50,7 @@ export class ShellComponent implements OnInit {
     public model: Shell;
 
     public get ready() {
-        return !!this.mower;
+        return !!this.model;
     }
 
     constructor() {}
