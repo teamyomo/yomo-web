@@ -2,19 +2,15 @@
 
 ## Setup
 
-General Linux setup...
-
-_Project Dependencies_
 * Curl
 * Git ([with SSH key if Linux](https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account))
-* [Node.js v10.x (no higher)](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
-y
+* [Node.js **v10.x (no higher)**](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
 * NPM `sudo apt-get install npm`
 * angular/clu - `npm install -g @angular/cli`
 
 After you setup all the the above...
 
-* clone the repo... `git clone ...`
+* clone the repo... `git clone https://github.com/teamyomo/yomo-web.git`
 * `cd yomo-web`
 * `npm install`
 
