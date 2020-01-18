@@ -14,6 +14,8 @@ After you setup all the the above...
 * `cd yomo-web`
 * `npm install`
 
+**Note, _IGNORE_ this message:** `Browserslist: caniuse-lite is outdated. Please run next command 'npm update' `
+
 ## Development server
 
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
