@@ -19,6 +19,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ThrottleSliderComponent } from './features/components/throttle-slider.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
         CommandComponent,
         RegionsComponent,
         SetupComponent,
-        SplitterComponent
+        SplitterComponent,
+        ThrottleSliderComponent
     ],
     imports: [
         BrowserModule,

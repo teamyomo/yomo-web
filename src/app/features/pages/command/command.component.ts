@@ -13,7 +13,8 @@ export class Command implements IPage {
     template: `
         <div class="throttle">
             <i class="fa fa-2x fa-arrow-alt-circle-right"></i>
-            <mat-slider [min]="0" [max]="1" [step]="0.01" vertical="vertical" [(value)]="model.mower.leftThrottle"></mat-slider>
+            <app-throttle-slider></app-throttle-slider>
+            <!-- <mat-slider [min]="0" [max]="1" [step]="0.01" vertical="vertical" [(value)]="model.mower.leftThrottle"></mat-slider> -->
         </div>
         <div class="middle">
             <div class="dash">
